@@ -1,0 +1,7 @@
+<h2>Join a Household</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Join</button>
+</form>
+<a href="{% url 'dashboard' %}">Back to dashboard</a>

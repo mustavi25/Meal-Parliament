@@ -1,0 +1,34 @@
+<h2>Welcome, {{ user.username }}!</h2>
+
+<form method="post" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+<hr>
+
+{% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<h3>Your Households</h3>
+{% if memberships %}
+    <ul>
+    {% for m in memberships %}
+        <li>
+            {{ m.household.name }} ({{ m.role }}) — invite code: {{ m.household.invite_code }}
+            — <a href="{% url 'household_meals' m.household.id %}">View meal plan</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You're not in any households yet.</p>
+{% endif %}
+
+<a href="{% url 'create_household' %}">Create a household</a> |
+<a href="{% url 'join_household' %}">Join with invite code</a>
+<p><a href="{% url 'create_meal_item' %}">Add a new meal item</a></p>

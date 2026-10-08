@@ -1,0 +1,7 @@
+<h2>Book a Meal for {{ household.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book</button>
+</form>
+<a href="{% url 'household_meals' household.id %}">Cancel</a>

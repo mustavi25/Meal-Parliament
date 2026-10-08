@@ -1,0 +1,27 @@
+<h2>{{ household.name }} — Meal Plan</h2>
+
+{% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if slots %}
+    <table border="1" cellpadding="6">
+        <tr><th>Date</th><th>Meal Type</th><th>Meal Item</th></tr>
+        {% for slot in slots %}
+        <tr>
+            <td>{{ slot.meal_date }}</td>
+            <td>{{ slot.meal_type }}</td>
+            <td>{{ slot.meal_item.title }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No meals booked yet.</p>
+{% endif %}
+
+<a href="{% url 'book_meal' household.id %}">Book a meal</a> |
+<a href="{% url 'dashboard' %}">Back to dashboard</a>
